@@ -1,20 +1,14 @@
 function generatePassword() {
-    var length = prompt("Enter the length of the password (between 8 and 128 characters):");
-    if (length === null) {
-      return;
-    }
+    var length = document.getElementById("length").value;
+    var lowercase = document.getElementById("lowercase").checked;
+    var uppercase = document.getElementById("uppercase").checked;
+    var numeric = document.getElementById("numeric").checked;
+    var special = document.getElementById("special").checked;
     
-    length = parseInt(length);
-    
-    if (isNaN(length) || length < 8 || length > 128) {
+    if (length < 8 || length > 128) {
       alert("Invalid length! Please enter a number between 8 and 128.");
       return;
     }
-    
-    var lowercase = confirm("Include lowercase characters?");
-    var uppercase = confirm("Include uppercase characters?");
-    var numeric = confirm("Include numeric characters?");
-    var special = confirm("Include special characters?");
     
     if (!lowercase && !uppercase && !numeric && !special) {
       alert("You must select at least one character type!");
@@ -23,7 +17,9 @@ function generatePassword() {
     
     var password = generateRandomPassword(length, lowercase, uppercase, numeric, special);
     var passwordField = document.getElementById("password");
-    passwordField.rows = Math.ceil(length / 15);
+  
+    passwordField.rows = Math.ceil(length / 30); // Adjust depending on how many characters you expect per line.
+  
     var copyBtn = document.querySelector(".copy-btn");
     var copySuccess = document.getElementById("copy-success");
     
@@ -49,42 +45,45 @@ function generatePassword() {
     try {
       var successful = document.execCommand("copy");
       if (successful) {
-        copyBtn.textContent = "Success";
-        copyBtn.disabled = true;
+        copyBtn.textContent = "Copied";
         copyBtn.classList.add("success");
         copySuccess.classList.remove("hidden");
-        copyBtn.style.display = "none"; // Add this line
       }
     } catch (err) {
       console.log("Failed to copy password to clipboard:", err);
     }
-  }  
+  }
   
   function generateRandomPassword(length, lowercase, uppercase, numeric, special) {
     var chars = "";
-    
+  
     if (lowercase) {
       chars += "abcdefghijklmnopqrstuvwxyz";
     }
-    
+  
     if (uppercase) {
       chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
-    
+  
     if (numeric) {
       chars += "0123456789";
     }
-    
+  
     if (special) {
       chars += "!@#$%^&*()_+-={}[]|:;<>,.?/~";
     }
-    
+  
     var password = "";
-    
+  
     for (var i = 0; i < length; i++) {
       var randomIndex = Math.floor(Math.random() * chars.length);
       password += chars.charAt(randomIndex);
+  
+      if ((i + 1) % 30 === 0) {
+        password += '\n';
+      }
     }
-    
+  
     return password;
   }
+  

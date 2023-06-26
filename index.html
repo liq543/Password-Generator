@@ -7,6 +7,18 @@
 <body>
   <h1>Password Generator</h1>
   <div class="container">
+    <div id="password-settings">
+      <label for="length">Length: </label>
+      <input id="length" type="number" min="8" max="128" value="8">
+      <br>
+      <label><input type="checkbox" id="lowercase"> Include lowercase characters</label>
+      <br>
+      <label><input type="checkbox" id="uppercase"> Include uppercase characters</label>
+      <br>
+      <label><input type="checkbox" id="numeric"> Include numeric characters</label>
+      <br>
+      <label><input type="checkbox" id="special"> Include special characters</label>
+    </div>
     <textarea id="password" readonly></textarea>
     <br>
     <button class="btn" onclick="generatePassword()">Generate Password</button>
