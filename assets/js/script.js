@@ -22,9 +22,42 @@ function generatePassword() {
     }
     
     var password = generateRandomPassword(length, lowercase, uppercase, numeric, special);
+    var passwordField = document.getElementById("password");
+    var copyBtn = document.querySelector(".copy-btn");
+    var copySuccess = document.getElementById("copy-success");
     
-    document.getElementById("password").value = password;
+    passwordField.value = password;
+    passwordField.classList.remove("edit-mode");
+    copyBtn.classList.remove("hidden");
+    copySuccess.classList.add("hidden");
+    
+    passwordField.select();
+    passwordField.setSelectionRange(0, passwordField.value.length);
+    
+    copyBtn.textContent = "Copy to Clipboard";
   }
+  
+  function copyToClipboard() {
+    var passwordField = document.getElementById("password");
+    var copyBtn = document.querySelector(".copy-btn");
+    var copySuccess = document.getElementById("copy-success");
+  
+    passwordField.select();
+    passwordField.setSelectionRange(0, passwordField.value.length);
+  
+    try {
+      var successful = document.execCommand("copy");
+      if (successful) {
+        copyBtn.textContent = "Success";
+        copyBtn.disabled = true;
+        copyBtn.classList.add("success");
+        copySuccess.classList.remove("hidden");
+        copyBtn.style.display = "none"; // Add this line
+      }
+    } catch (err) {
+      console.log("Failed to copy password to clipboard:", err);
+    }
+  }  
   
   function generateRandomPassword(length, lowercase, uppercase, numeric, special) {
     var chars = "";
