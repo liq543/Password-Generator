@@ -23,6 +23,7 @@ function generatePassword() {
     
     var password = generateRandomPassword(length, lowercase, uppercase, numeric, special);
     var passwordField = document.getElementById("password");
+    passwordField.rows = Math.ceil(length / 15);
     var copyBtn = document.querySelector(".copy-btn");
     var copySuccess = document.getElementById("copy-success");
     
@@ -87,4 +88,3 @@ function generatePassword() {
     
     return password;
   }
-  
