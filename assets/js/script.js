@@ -18,7 +18,7 @@ function generatePassword() {
     var password = generateRandomPassword(length, lowercase, uppercase, numeric, special);
     var passwordField = document.getElementById("password");
   
-    passwordField.rows = Math.ceil(length / 30); // Adjust depending on how many characters you expect per line.
+    passwordField.rows = Math.ceil(length / 15); // Adjust depending on how many characters you expect per line.
   
     var copyBtn = document.querySelector(".copy-btn");
     var copySuccess = document.getElementById("copy-success");
