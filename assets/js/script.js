@@ -18,7 +18,7 @@ function generatePassword() {
     var password = generateRandomPassword(length, lowercase, uppercase, numeric, special);
     var passwordField = document.getElementById("password");
   
-    passwordField.rows = Math.ceil(length / 15); // Adjust depending on how many characters you expect per line.
+    passwordField.rows = Math.ceil(length / 30); // Adjust depending on how many characters you expect per line.
   
     var copyBtn = document.querySelector(".copy-btn");
     var copySuccess = document.getElementById("copy-success");
@@ -85,5 +85,47 @@ function generatePassword() {
     }
   
     return password;
+  }
+  
+  function generatePasswordWithPrompts() {
+    var length = prompt("Enter the length of the password (between 8 and 128 characters):");
+    if (length === null) {
+      return;
+    }
+    
+    length = parseInt(length);
+    
+    if (isNaN(length) || length < 8 || length > 128) {
+      alert("Invalid length! Please enter a number between 8 and 128.");
+      return;
+    }
+    
+    var lowercase = confirm("Include lowercase characters?");
+    var uppercase = confirm("Include uppercase characters?");
+    var numeric = confirm("Include numeric characters?");
+    var special = confirm("Include special characters?");
+    
+    if (!lowercase && !uppercase && !numeric && !special) {
+      alert("You must select at least one character type!");
+      return;
+    }
+    
+    var password = generateRandomPassword(length, lowercase, uppercase, numeric, special);
+    var passwordField = document.getElementById("password");
+    
+    passwordField.rows = Math.ceil(length / 30);
+  
+    var copyBtn = document.querySelector(".copy-btn");
+    var copySuccess = document.getElementById("copy-success");
+    
+    passwordField.value = password;
+    passwordField.classList.remove("edit-mode");
+    copyBtn.classList.remove("hidden");
+    copySuccess.classList.add("hidden");
+    
+    passwordField.select();
+    passwordField.setSelectionRange(0, passwordField.value.length);
+    
+    copyBtn.textContent = "Copy to Clipboard";
   }
   
