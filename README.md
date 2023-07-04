@@ -34,7 +34,7 @@ https://github.com/liq543/Password-Generator/ https://liq543.github.io/Password-
 
 ## Screenshot
 
-![alt text]([http://url/to/img.png](https://i.imgur.com/hUM15UB.png))
+![Password Generator]([https://i.imgur.com/hUM15UB.png])
 
 ## Usage
 
