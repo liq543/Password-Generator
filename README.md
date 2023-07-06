@@ -17,7 +17,7 @@ This project is a versatile and customizable password generator, designed to cre
 Clone the repository to your local development environment:
 
 ```bash
-git clone https://github.com/Your-Username/Password-Generator.git
+git clone https://github.com/liq543/Password-Generator.git
 ```
 
 Navigate to the Password-Generator folder:
